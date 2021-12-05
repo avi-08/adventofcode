@@ -42,19 +42,24 @@ def calculate_position_w_aim(moves):
     return x_loc, y_loc, aim
 
 
-moves = read_input()
-print(f"Total moves: {len(moves)}")
+def main():
+    moves = read_input()
+    print(f"Total moves: {len(moves)}")
 
-# Part one
-pos, depth = calculate_position(moves)
-print(f"Moved long X-axis: {pos} units")
-print(f"Moved along Y-axis: {depth} units")
-print(f"Co-ordinate product: {pos * depth}")
+    # Part one
+    pos, depth = calculate_position(moves)
+    print(f"Moved long X-axis: {pos} units")
+    print(f"Moved along Y-axis: {depth} units")
+    print(f"Co-ordinate product: {pos * depth}")
 
-print("\n<=============>\n")
-# Part two
-pos, depth, aim = calculate_position_w_aim(moves)
-print(f"Moved long X-axis: {pos} units")
-print(f"Moved along Y-axis: {depth} units")
-print(f"Current aim setting: {aim} ")
-print(f"Co-ordinate product: {pos * depth}")
+    print("\n<=============>\n")
+    # Part two
+    pos, depth, aim = calculate_position_w_aim(moves)
+    print(f"Moved long X-axis: {pos} units")
+    print(f"Moved along Y-axis: {depth} units")
+    print(f"Current aim setting: {aim} ")
+    print(f"Co-ordinate product: {pos * depth}")
+
+
+if __name__ == '__main__':
+    main()

@@ -75,7 +75,7 @@ def main():
     for i, board in enumerate(boards):
         print(f"Board {i + 1}: {board}")
 
-    print('\n<------------------------>\n')
+    print("\n<=============>\n")
 
     # Part two
     winners = play(nums=nums, boards=boards, win_at=len(boards), winners=winners)

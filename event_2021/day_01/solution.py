@@ -36,15 +36,21 @@ def find_increased_window_depths(depths, window_size=1):
     return increased
 
 
-depths = read_input()
-total_depths = len(depths)
-print(f"Input Depths: {total_depths}")
+def main():
+    depths = read_input()
+    total_depths = len(depths)
+    print(f"Input Depths: {total_depths}")
 
-# Part one
-increased = find_increased_depths(depths)
-print(f"Depth increased {increased} times out of {total_depths}")
+    # Part one
+    increased = find_increased_depths(depths)
+    print(f"Depth increased {increased} times out of {total_depths}")
 
-# Part two
-window = 3
-increased_window = find_increased_window_depths(depths, window)
-print(f"Depth increased within window of {window} readings: {increased_window} times out of {total_depths-window+1}")
+    print("\n<=============>\n")
+    # Part two
+    window = 3
+    increased_window = find_increased_window_depths(depths, window)
+    print(f"Depth increased within window of {window} readings: {increased_window} times out of {total_depths-window+1}")
+
+
+if __name__ == '__main__':
+    main()

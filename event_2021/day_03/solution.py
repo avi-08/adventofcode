@@ -93,7 +93,7 @@ def main():
     power = get_power_consumption(gamma_rate, epsilon_rate)
     print(f"Power consumption: {power} units")
 
-    print("\n-----------------\n")
+    print("\n<=============>\n")
     # Part two
     o2, co2 = get_o2_generator_rating(readings), get_co2_scrubber_rating(readings)
     o2_generator_rating, co2_scrubber_rating = binary_to_decimal(o2), binary_to_decimal(co2)
