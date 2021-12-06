@@ -2,7 +2,7 @@ import os
 
 
 def read_input(file_name='input.txt'):
-    file_path = os.path.join(os.path.curdir, file_name)
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
 
     with open(file_path, 'r') as f:
         depths = f.readlines()
