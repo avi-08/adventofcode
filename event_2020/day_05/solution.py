@@ -59,7 +59,6 @@ def main():
     
     print(f"Your seat ID [{my_seat}]. Buckle up fast!!")
     
-    
-
+  
 if __name__ == '__main__':
     main()
