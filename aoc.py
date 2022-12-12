@@ -9,8 +9,6 @@ import logging
 from typing import List
 
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
-
 BASE = os.path.dirname(os.path.abspath(__file__))
 EVENT_PREFIX = "event"
 DAY_PREFIX = "day"
@@ -64,8 +62,16 @@ def execute_aoc_solution(args):
     
     logging.info(f"Executing solution of {args.day} from event {args.event}")
     
+    cmd = [sys.executable, file_to_execute]
+    
+    if args.verbose:
+        cmd.append("--verbose")
+    if args.run_sample:
+        cmd.append("--run-sample")
+    
     try:
-        subprocess.run([sys.executable, file_to_execute])
+        logging.debug(f"Running command: {' '.join(cmd)}")
+        subprocess.run(cmd)
     except Exception as ex:
         logging.error(f"Failed to execute, error occurred: {ex}")
         raise ex
@@ -75,12 +81,18 @@ def execute_aoc_solution(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run adventofcode problem solutions")
-    subparsers = parser.add_subparsers(title="event", dest="event", required=True, help='event help')
+    subparsers = parser.add_subparsers(title="event", dest="event", required=True, help='Run problem solutions for adventofcode events')
 
     cmds = get_commands()
 
     for event_cmd in cmds:
         event_cmd.set_parser(subparsers.add_parser(event_cmd.get_event(), help=f'Run problem solutions for adventofcode {event_cmd.get_event()}'))
         event_cmd.get_parser().add_argument("-d", "--day", choices=event_cmd.get_sub_commands(), help="Problem of the day")
+        event_cmd.get_parser().add_argument("-v", "--verbose", action="store_true", help="Log with more verbosity")
+        event_cmd.get_parser().add_argument('-s', '--run-sample', action='store_true', help='Run with sample.txt; if omitted, runs with input.txt')
     args = parser.parse_args()
+    if args.verbose:
+        logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+    else:
+        logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
     execute_aoc_solution(args)

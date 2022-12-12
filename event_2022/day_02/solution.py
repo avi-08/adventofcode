@@ -1,8 +1,6 @@
+import argparse
 import os
 import logging
-
-
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 
 def read_input(file_name='input.txt'):
@@ -84,8 +82,8 @@ def calculate_score_p2(lines):
     return score
             
 
-def main():
-    lines = read_input('input.txt')
+def main(args):
+    lines = read_input('sample.txt' if args.run_sample else 'input.txt')
     
     # Part one
     p1_score = calculate_score_p1(lines)
@@ -96,4 +94,9 @@ def main():
     logging.info(f"Part2 Score: {p2_score}")
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-s', '--run-sample', action='store_true', help='Run with sample.txt; if omitted, runs with input.txt')
+    args = parser.parse_args()
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG if args.verbose else logging.INFO)
+    main(args)

@@ -1,4 +1,6 @@
+import argparse
 import os
+import logging
 
 
 def read_input(file_name='input.txt'):
@@ -36,21 +38,25 @@ def find_increased_window_depths(depths, window_size=1):
     return increased
 
 
-def main():
-    depths = read_input()
+def main(args):
+    depths = read_input('sample.txt' if args.run_sample else 'input.txt')
     total_depths = len(depths)
-    print(f"Input Depths: {total_depths}")
+    logging.info(f"Input Depths: {total_depths}")
 
     # Part one
     increased = find_increased_depths(depths)
-    print(f"Depth increased {increased} times out of {total_depths}")
+    logging.info(f"Depth increased {increased} times out of {total_depths}")
 
-    print("\n<=============>\n")
     # Part two
     window = 3
     increased_window = find_increased_window_depths(depths, window)
-    print(f"Depth increased within window of {window} readings: {increased_window} times out of {total_depths-window+1}")
+    logging.info(f"Depth increased within window of {window} readings: {increased_window} times out of {total_depths-window+1}")
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-s', '--run-sample', action='store_true', help='Run with sample.txt; if omitted, runs with input.txt')
+    args = parser.parse_args()
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG if args.verbose else logging.INFO)
+    main(args)

@@ -1,8 +1,6 @@
+import argparse
 import os
 import logging
-
-
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 
 def read_input(file_name='input.txt'):
@@ -54,8 +52,8 @@ def identify_badge(group):
             return get_badge(col + 1) 
     
 
-def main():
-    lines = read_input('input.txt')
+def main(args):
+    lines = read_input('sample.txt' if args.run_sample else 'input.txt')
     
     # Part one
     total_priority = 0
@@ -77,4 +75,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-s', '--run-sample', action='store_true', help='Run with sample.txt; if omitted, runs with input.txt')
+    args = parser.parse_args()
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG if args.verbose else logging.INFO)
+    main(args)
