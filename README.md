@@ -9,6 +9,12 @@ python3 aoc.py --help
 
 # Execute solution for day 2 of event 2020
 python3 aoc.py event_2020 -d day_02
+
+# Execute solution for day 2 of event 2020 with sample input
+python3 aoc.py event_2020 -d day_02 -s
+
+# Execute solution for day 2 of event 2020 with sample input and verbose logs
+python3 aoc.py event_2020 -d day_02 -v -s
 ```
 
 ## Navigation guide
